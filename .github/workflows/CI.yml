@@ -5,10 +5,9 @@ name: CI
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '* * 28 * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -19,10 +18,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - uses: addnab/docker-run-action@v1
-      with:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-        registry: gcr.io
-        image: appulate/tta/tta:latest
-        run:  tta -u ivan.petrov -c 14 -p MySuperDomainPassword -m "Super Job"
+      - name: Muranosoft TimeTracker AutoFiller
+        env:
+          AD_USERNAME: ${{ secrets.AD_USERNAME }}
+          AD_PASSWORD: ${{ secrets.AD_PASSWORD }}
+          CATEGORY: ${{ secrets.CATEGORY }}
+          DESCRIPTION: ${{ secrets.DESCRIPTION }}
+        run: |
+          docker run --rm --entrypoint tta appulate/tta:latest -u $AD_USERNAME -c $CATEGORY -p $AD_PASSWORD -d "$DESCRIPTION"
