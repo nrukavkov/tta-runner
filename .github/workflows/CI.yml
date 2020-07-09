@@ -5,24 +5,46 @@ name: CI
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
+  workflow_dispatch:
+    inputs:
+      category:
+        description: 'Category'
+        required: true
+      description:
+        description: 'Description'
+        required: true  
+  
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '0 0 28 * *'
+    - cron:  '*/5 * * * *'
+     
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
+    env:
+      # https://github.com/appulate/tta/blob/master/README.rst
+      CATEGORY: 14
+      DESCRIPTION: "My super job"  
+    
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Override vars
+        run: | 
+          if [  -n "${{ github.event.inputs.category }}" ]; then 
+            echo "::set-env name=CATEGORY::${{ github.event.inputs.category }}" 
+          fi
+          if [ -n "${{ github.event.inputs.description }}" ]; then 
+            echo "::set-env name=DESCRIPTION::${{ github.event.inputs.description }}" 
+          fi
+        
       - name: Muranosoft TimeTracker AutoFiller
         env:
           AD_USERNAME: ${{ secrets.AD_USERNAME }}
           AD_PASSWORD: ${{ secrets.AD_PASSWORD }}
-          CATEGORY: ${{ secrets.CATEGORY }}
-          DESCRIPTION: ${{ secrets.DESCRIPTION }}
         run: |
-          docker run --rm --entrypoint tta appulate/tta:latest -u $AD_USERNAME -c $CATEGORY -p $AD_PASSWORD -d "$DESCRIPTION"
+          docker run --rm --entrypoint tta appulate/tta:latest -u $AD_USERNAME -p $AD_PASSWORD -c $CATEGORY -d "$DESCRIPTION"
