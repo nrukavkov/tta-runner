@@ -2,7 +2,7 @@
 
 ![CI](https://github.com/nrukavkov/tta-runner/workflows/CI/badge.svg)
 
-Actions, который 27 числа каждого месяца запускается и используя docker образ (собранный из https://github.com/appulate/tta), заполняет Time Tracker.
+Actions, который 25 числа каждого месяца запускается и используя docker образ (собранный из https://github.com/appulate/tta), заполняет Time Tracker.
 
 ## Базовая настройка
 
