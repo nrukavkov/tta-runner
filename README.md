@@ -9,7 +9,7 @@ Actions, который 25 числа каждого месяца запуска
  1. Сделать [fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) проекта.
  2. Прописать логин и пароль пользователя tt в [Secrets](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets): **TT_USERNAME, TT_PASSWORD**. 
  ![enter image description here](https://github.com/nrukavkov/tta-runner/raw/master/readme/example_01.png)
- 3. Задаем персональные настройки категории и описания. Находим файл tta-runner/.github/workflows/CI.yml, жмем edit. Находим строки, где заданы настройки и заполняем нужными значениями. Номер нужной категории можно найти в описании репозитория [appulate/tta](https://github.com/appulate/tta/blob/master/README.rst)
+ 3. Задаем персональные настройки категории и описания. Находим файл **tta-runner/.github/workflows/CI.yml**, жмем **edit**. Находим строки, где заданы настройки и заполняем нужными значениями. Номер нужной категории можно найти в описании репозитория [appulate/tta](https://github.com/appulate/tta/blob/master/README.rst)
  ![enter image description here](https://github.com/nrukavkov/tta-runner/raw/master/readme/example_03.png)
 
 ### Автоматический запуск
