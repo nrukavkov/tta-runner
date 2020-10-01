@@ -25,8 +25,8 @@ jobs:
   build:
     env:
       # https://github.com/appulate/tta/blob/master/README.rst
-      CATEGORY: 14
-      DESCRIPTION: "My super job"  
+      CATEGORY: 10
+      DESCRIPTION: "Работал не покладая рук и не моя ног."  
     
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
