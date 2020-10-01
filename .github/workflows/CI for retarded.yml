@@ -13,6 +13,12 @@ on:
       description:
         description: 'Description'
         required: true  
+      startdate:
+        description: 'Start Date (i.e. 2020-10-15)'
+        required: true  
+      enddate:
+        description: 'End Date (i.e. 2020-10-15)'
+        required: true  
   
   schedule:
     # * is a special character in YAML so you have to quote this string
@@ -41,10 +47,16 @@ jobs:
           if [ -n "${{ github.event.inputs.description }}" ]; then 
             echo "::set-env name=DESCRIPTION::${{ github.event.inputs.description }}" 
           fi
+          if [ -n "${{ github.event.inputs.description }}" ]; then 
+            echo "::set-env name=STARTDATE::${{ github.event.inputs.startdate }}" 
+          fi
+          if [ -n "${{ github.event.inputs.description }}" ]; then 
+            echo "::set-env name=ENDDATE::${{ github.event.inputs.enddate }}" 
+          fi
         
       - name: Muranosoft TimeTracker AutoFiller
         env:
           TT_USERNAME: ${{ secrets.TT_USERNAME }}
           TT_PASSWORD: ${{ secrets.TT_PASSWORD }}
         run: |
-         docker run --rm --entrypoint tta appulate/tta:latest -u $TT_USERNAME -p $TT_PASSWORD --start_date "2020-9-02" --end_date "2020-9-30" -c $CATEGORY -d "$DESCRIPTION" 
+         docker run --rm --entrypoint tta appulate/tta:latest -u $TT_USERNAME -p $TT_PASSWORD --start_date "$STARTDATE" --end_date "$ENDDATE" -c $CATEGORY -d "$DESCRIPTION" 
