@@ -1,0 +1,50 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  workflow_dispatch:
+    inputs:
+      category:
+        description: 'Category'
+        required: true
+      description:
+        description: 'Description'
+        required: true  
+  
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 0 25 * *'
+     
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    env:
+      # https://github.com/appulate/tta/blob/master/README.rst
+      CATEGORY: 10
+      DESCRIPTION: "Работал не покладая рук и не моя ног."  
+    
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Override vars
+        run: | 
+          if [  -n "${{ github.event.inputs.category }}" ]; then 
+            echo "::set-env name=CATEGORY::${{ github.event.inputs.category }}" 
+          fi
+          if [ -n "${{ github.event.inputs.description }}" ]; then 
+            echo "::set-env name=DESCRIPTION::${{ github.event.inputs.description }}" 
+          fi
+        
+      - name: Muranosoft TimeTracker AutoFiller
+        env:
+          TT_USERNAME: ${{ secrets.TT_USERNAME }}
+          TT_PASSWORD: ${{ secrets.TT_PASSWORD }}
+        run: |
+          docker run --rm --entrypoint tta appulate/tta:latest -u $TT_USERNAME -p $TT_PASSWORD -c $CATEGORY -d "$DESCRIPTION" --start_date "2020-9-02" --end_date "2020-9-30"
