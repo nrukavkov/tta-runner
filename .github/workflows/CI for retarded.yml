@@ -17,7 +17,7 @@ on:
         description: 'Start Date (i.e. 2020-09-01)'
         required: true  
       enddate:
-        description: 'End Date (i.e. 2020-10-15)'
+        description: 'End Date (i.e. 2020-09-30)'
         required: true  
   
   schedule:
