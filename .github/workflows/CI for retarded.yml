@@ -49,7 +49,7 @@ jobs:
           if [ -n "${{ github.event.inputs.description }}" ]; then 
             echo "::set-env name=STARTDATE::${{ github.event.inputs.startdate }}" 
           fi
-          if [ -n "${{ github.event.inputs.description }}" ]; then 
+          if [ -n "${{ github.event.inputs.enddate }}" ]; then 
             echo "::set-env name=ENDDATE::${{ github.event.inputs.enddate }}" 
           fi
         
