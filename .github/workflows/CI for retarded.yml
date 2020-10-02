@@ -17,7 +17,6 @@ on:
         description: 'Start Date (i.e. 2020-09-01)'
       enddate:
         description: 'End Date (i.e. 2020-09-30)'
-        required: true  
   
   schedule:
     # * is a special character in YAML so you have to quote this string
