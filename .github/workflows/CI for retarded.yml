@@ -40,16 +40,16 @@ jobs:
       - name: Override vars
         run: | 
           if [  -n "${{ github.event.inputs.category }}" ]; then 
-            echo "::set-env name=CATEGORY::${{ github.event.inputs.category }}" 
+            echo "CATEGORY=${{ github.event.inputs.category }}" >> $GITHUB_ENV
           fi
           if [ -n "${{ github.event.inputs.description }}" ]; then 
-            echo "::set-env name=DESCRIPTION::${{ github.event.inputs.description }}" 
+            echo "DESCRIPTION=${{ github.event.inputs.description }}" >> $GITHUB_ENV
           fi
           if [ -n "${{ github.event.inputs.startdate }}" ]; then 
-            echo "::set-env name=STARTDATE::${{ github.event.inputs.startdate }}" 
+            echo "STARTDATE=${{ github.event.inputs.startdate }}" >> $GITHUB_ENV
           fi
           if [ -n "${{ github.event.inputs.enddate }}" ]; then 
-            echo "::set-env name=ENDDATE::${{ github.event.inputs.enddate }}" 
+            echo "ENDDATE=${{ github.event.inputs.enddate }}" >> $GITHUB_ENV
           fi
         
       - name: Muranosoft TimeTracker AutoFiller
