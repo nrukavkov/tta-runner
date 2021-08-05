@@ -47,4 +47,4 @@ jobs:
           TT_USERNAME: ${{ secrets.TT_USERNAME }}
           TT_PASSWORD: ${{ secrets.TT_PASSWORD }}
         run: |
-          docker run --rm --entrypoint tta appulate/tta:latest -u $TT_USERNAME -p $TT_PASSWORD -c $CATEGORY -d "$DESCRIPTION"
+          docker run --rm --entrypoint tta appulate/tta:latest -u $TT_USERNAME -p "$TT_PASSWORD" -c $CATEGORY -d "$DESCRIPTION"
